@@ -252,3 +252,28 @@ def hasCycle(self, head):
     else: return False
 ```
 
+---
+
+## \#199 Binary Tree Right Side View
+> Given a binary tree, 
+> imagine yourself standing on the right side of it, 
+> return the values of the nodes you can see ordered from top to bottom.
+> 
+> For example:
+> Given the following binary tree,
+>    1            <---
+>  /   \
+> 2     3         <---
+>  \     \
+>   5     4       <---
+> You should return [1, 3, 4].
+
+这题其实没想出来解法……  
+看题目给出的example还以为是一直找右子树就可以了，
+结果对于左子树高度大于右子树的情况也需要考虑。  
+本来觉得对这棵树做一个层序遍历就可以了，
+每一层的最后一个节点记录一下数据，
+但是给出的TreeNode定义里并没有高度，
+除非有办法在遍历的过程中记录高度。  
+然而并没有想到有什么优雅的解法。  
+暂且搁置吧。  
