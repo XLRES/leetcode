@@ -257,16 +257,16 @@ def hasCycle(self, head):
 ## \#199 Binary Tree Right Side View
 > Given a binary tree, 
 > imagine yourself standing on the right side of it, 
-> return the values of the nodes you can see ordered from top to bottom.
+> return the values of the nodes you can see ordered from top to bottom.  
 > 
-> For example:
-> Given the following binary tree,
->    1            <---
->  /   \
-> 2     3         <---
->  \     \
->   5     4       <---
-> You should return [1, 3, 4].
+> For example:  
+> Given the following binary tree,  
+>    1            <---  
+>  /   \  
+> 2     3         <---  
+>  \     \  
+>   5     4       <---  
+> You should return [1, 3, 4].  
 
 这题其实没想出来解法……  
 看题目给出的example还以为是一直找右子树就可以了，
@@ -277,3 +277,31 @@ def hasCycle(self, head):
 除非有办法在遍历的过程中记录高度。  
 然而并没有想到有什么优雅的解法。  
 暂且搁置吧。  
+
+## \#191 Number of 1 Bits
+> Write a function that takes an unsigned integer 
+> and returns the number of ’1' bits it has 
+> (also known as the Hamming weight).  
+> 
+> For example,   
+> the 32-bit integer ’11' has binary representation 
+> 00000000000000000000000000001011, 
+> so the function should return 3.  
+
+求一个数字转换成二进制后有多少位是1.  
+↑↑↑其实这是个有引导性的说法，数值本身是无所谓几进制的。  
+一种思路是进行“进制转换”，对n每次减半然后数模2的余数。  
+另一种思路是直接把n当作二进制，
+每次看一眼最后一位是1还是0然后整串数字右移。  
+当然这两种思路是完全相同的，
+只是突然让我写个进制转换之类的东西说不定我还得真好好想想边界条件什么的……  
+略水。  
+
+```python
+def hammingWeight(self, n):
+    s = 0
+    while n > 0:
+        s += n % 2
+        n = n >> 1
+    return s
+```
