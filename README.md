@@ -259,15 +259,8 @@ def hasCycle(self, head):
 > imagine yourself standing on the right side of it, 
 > return the values of the nodes you can see ordered from top to bottom.  
 > 
-> For example:  
-> Given the following binary tree,  
->    1            <---  
->  /   \  
-> 2     3         <---  
->  \     \  
->   5     4       <---  
-> You should return [1, 3, 4].  
 
+因为懒得排版就不贴example了。  
 这题其实没想出来解法……  
 看题目给出的example还以为是一直找右子树就可以了，
 结果对于左子树高度大于右子树的情况也需要考虑。  
@@ -305,3 +298,54 @@ def hammingWeight(self, n):
         n = n >> 1
     return s
 ```
+
+## \# 110 Balanced Binary Tree
+
+> Given a binary tree, determine if it is height-balanced.  
+> 
+> For this problem, 
+> a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+
+判断给定的二叉树是否平衡。   
+理论上是挺简单的可是这段时间忙于考试代码生疏了这么多遍才过……   
+首先，二叉树不平衡的条件是
+树及其任一子树的左右子树高度差大于等于2   
+所以写了treeDepth用了递归的方式求高度（深度）。   
+然后是isBalanced 当中除了判断当前节点是否平衡以外，
+在最后还要递归地考虑左右子树是否平衡。   
+这么一来程序非常间接，逻辑也很清晰，
+然而时间复杂度和空间复杂度都相当差……  
+无论是 treeDepth 还是 isBalanced 递归时都用上了表达式
+而不能被编译器优化，
+isBalanced 递归过程中对于各点的深度计算也有严重重复。  
+解决方法也有，尾递归优化做不了的话，
+手动操作出入栈改成循环即可；  
+各结点深度能写进 TreeNode 最好，
+不能的话临时开个表记录也成。  
+
+然而非常令我惊讶的是我这种时间空间都不合格的算法
+排名居然并不是很靠后……  
+看来大家水leetcode的时候都用的是好写的渣算法233
+
+```python
+def treeDepth (self, root):
+    if root == None :
+        return -1
+    ldepth = self.treeDepth (root.left)
+    rdepth = self.treeDepth (root.right)
+    if ldepth > rdepth :
+        return ldepth + 1
+    else :
+        return rdepth + 1
+
+def isBalanced (self, root):
+    if root == None :
+        return True
+    ldepth = self.treeDepth(root.left)
+    rdepth = self.treeDepth(root.right)
+    if ldepth - rdepth > 1 or rdepth - ldepth > 1 :
+        return False
+    else:
+        return self.isBalanced(root.left) and isisBalanced(root.right)
+```
+

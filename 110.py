@@ -24,7 +24,7 @@ class Solution:
         if ldepth - rdepth > 1 or rdepth - ldepth > 1 :
             return False
         else:
-            return self.isBalanced(root.left) and self.isBalanced(root.right)
+            return self.isBalanced(root.left) and isisBalanced(root.right)
 
 s = Solution ()
 
